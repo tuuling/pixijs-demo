@@ -2,8 +2,7 @@ import { Application, SCALE_MODES, settings } from 'pixi.js'
 
 import map from './maps/map.json';
 
-import houseimg from './images/house.png';
-import WorldMap from './models/WorldMap';
+import World from './models/World';
 
 settings.SCALE_MODE = SCALE_MODES.NEAREST
 
@@ -17,11 +16,7 @@ const app = new Application({
 
 document.body.appendChild(app.view);
 
-const worldMap = new WorldMap(map);
+const worldMap = new World(map);
 
 app.stage.addChild(worldMap.container);
 
-app.loader.add('house', houseimg);
-app.loader.load((loader, resources) => {
-  console.log(resources);
-})

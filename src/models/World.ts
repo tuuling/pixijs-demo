@@ -1,14 +1,17 @@
-import { BaseTexture, Container, ParticleContainer, Sprite, Texture } from "pixi.js";
+import { Container, ParticleContainer, Sprite } from "pixi.js";
 import RhombusCord from './RhombusCord';
 
 
-import house from '../images/house.png';
-import { Groundsheet } from '../spritesheets/Groundsheet';
+import { SurfaceTiles } from '../spritesheets/surface-tiles/SurfaceTiles';
+import { GroundObjects } from "../spritesheets/ground-objets/GroundObjects";
 
-export default class WorldMap {
-  private groundsheet = new Groundsheet();
+export default class World {
+  private groundsheet = new SurfaceTiles();
+  private objectsheet = new GroundObjects();
+
   private ground = new Map<string, { type: string }>()
   private objects = new Map<string, string>()
+
   container = new Container();
 
   constructor(map = { ground: {}, objects: {} }) {
@@ -32,31 +35,39 @@ export default class WorldMap {
   }
 
   private createStage() {
-    const groundCont = new ParticleContainer();
-    const objCont = new Container();
+    const groundCont = this.createTiles();
+    const objCont = this.createObjects();
+
+    this.container.addChild(groundCont, objCont);
+  }
+
+  private createTiles() {
+    const container = new ParticleContainer();
 
     this.ground.forEach((value, key) => {
       const cord = RhombusCord.fromKey(key);
+
       const tile = new Sprite(this.groundsheet.textures[value.type])
-      tile.x = cord.pixel.x;
-      tile.y = cord.pixel.y;
-      groundCont.addChild(tile);
+      tile.position.set(cord.pixel.x, cord.pixel.y)
+
+      container.addChild(tile);
     });
+
+    return container
+  }
+
+  private createObjects() {
+    const container = new ParticleContainer();
 
     this.objects.forEach((value, key) => {
       const cord = RhombusCord.fromKey(key);
 
-      if (value === 'house') {
-        const baseTexture = new BaseTexture(house, { resolution: 2 });
-        const sprite = new Sprite(new Texture(baseTexture))
-        sprite.pivot.set(41, 182);
-        sprite.position.set(cord.pixel.x, cord.pixel.y)
+      const sprite = new Sprite(this.objectsheet.textures[value])
+      sprite.position.set(cord.pixel.x, cord.pixel.y)
 
-        objCont.addChild(sprite);
-      }
-
+      container.addChild(sprite);
     })
 
-    this.container.addChild(groundCont, objCont);
+    return container
   }
 }
