@@ -1,5 +1,5 @@
-import { BaseTexture, SCALE_MODES, Spritesheet } from 'pixi.js';
-import groundsheet from '../images/ground-sheetx1.png';
+import { BaseTexture, Spritesheet } from 'pixi.js';
+import groundsheet from '../images/ground-sheet.png';
 
 const spriteData = {
   frames: {
@@ -25,11 +25,12 @@ const spriteData = {
     scale: 1,
   }
 }
-// const baseTexture = new BaseTexture(groundsheet, {resolution: 1, scaleMode: SCALE_MODES.NEAREST});
-const baseTexture = new BaseTexture(groundsheet, {resolution: 1});
 
-const sheet = new Spritesheet(baseTexture, spriteData);
-sheet.parse(() => {});
-
-export default sheet;
+export class Groundsheet extends Spritesheet {
+  constructor() {
+    const baseTexture = new BaseTexture(groundsheet, {resolution: 1});
+    super(baseTexture, spriteData);
+    super.parse(() => {});
+  }
+}
 

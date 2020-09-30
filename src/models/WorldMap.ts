@@ -3,9 +3,10 @@ import RhombusCord from './RhombusCord';
 
 
 import house from '../images/house.png';
-import groundsheet from '../spritesheets/Groundsheet';
+import { Groundsheet } from '../spritesheets/Groundsheet';
 
 export default class WorldMap {
+  private groundsheet = new Groundsheet();
   private ground = new Map<string, { type: string }>()
   private objects = new Map<string, string>()
   container = new Container();
@@ -36,7 +37,7 @@ export default class WorldMap {
 
     this.ground.forEach((value, key) => {
       const cord = RhombusCord.fromKey(key);
-      const tile = new Sprite(groundsheet.textures[value.type])
+      const tile = new Sprite(this.groundsheet.textures[value.type])
       tile.x = cord.pixel.x;
       tile.y = cord.pixel.y;
       groundCont.addChild(tile);

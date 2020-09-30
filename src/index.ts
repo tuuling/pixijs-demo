@@ -1,17 +1,11 @@
-import {
-  Application,
-  SCALE_MODES,
-  settings
-} from 'pixi.js'
+import { Application, SCALE_MODES, settings } from 'pixi.js'
 
 import map from './maps/map.json';
 
 import houseimg from './images/house.png';
 import WorldMap from './models/WorldMap';
 
-settings.SCALE_MODE = SCALE_MODES.NEAREST;
-
-console.log(settings);
+settings.SCALE_MODE = SCALE_MODES.NEAREST
 
 const app = new Application({
   resizeTo: window,
