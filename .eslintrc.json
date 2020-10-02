@@ -51,7 +51,8 @@
         },
         "FunctionExpression": {
           "parameters": "first"
-        }
+        },
+        "SwitchCase": 1
       }
     ],
     "@typescript-eslint/prefer-regexp-exec": "off",
