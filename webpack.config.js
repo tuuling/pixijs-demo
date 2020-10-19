@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
 module.exports = {
     mode: 'development',

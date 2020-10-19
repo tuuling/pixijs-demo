@@ -18,12 +18,13 @@
   },
   "settings": {
     "import/parser": {
-      "@typescript-eslint/parser": [".ts", ".tsx "]
+      "@typescript-eslint/parser": [".ts"]
     },
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true
-      }
+      },
+      "eslint-import-resolver-typescript": true
     }
   },
   "plugins": [
@@ -78,6 +79,7 @@
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/unbound-method": ["error", {"ignoreStatic": true}],
@@ -95,11 +97,11 @@
       "off",
       "as-needed"
     ],
-    "camelcase": "error",
+    "camelcase": "warn",
     "comma-dangle": "off",
     "complexity": "off",
     "constructor-super": "error",
-    "curly": "error",
+    "curly": ["error", "multi-line"],
     "dot-notation": "error",
     "eol-last": "error",
     "eqeqeq": [

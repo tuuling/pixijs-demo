@@ -1,6 +1,7 @@
 import { Application, SCALE_MODES, settings } from 'pixi.js';
 
 import map from './maps/map.json';
+import { sprites } from './spritesheets/sprites';
 import store from './redux/store';
 
 import World from './models/World';
@@ -15,11 +16,11 @@ const app = new Application({
   backgroundColor: 0xFFFFFF
 });
 
+store.initStore();
 document.body.appendChild(app.view);
+sprites.initSprites();
 
 const worldMap = new World(map);
-
-console.log(store);
 
 app.stage.addChild(worldMap.worldContainer);
 
